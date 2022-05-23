@@ -1,19 +1,16 @@
-import {Command, Flags} from '@oclif/core'
+import {Command} from '@oclif/core'
+import {injectableFlags, injectableArgs} from '../../util'
 
 export default class Hello extends Command {
   static description = 'Say hello'
 
   static examples = [
-    `$ oex hello friend --from oclif
-hello friend from oclif! (./src/commands/hello/index.ts)
-`,
+    'injectable hello John -f joe',
   ]
 
-  static flags = {
-    from: Flags.string({char: 'f', description: 'Whom is saying hello', required: true}),
-  }
+  static flags = injectableFlags
 
-  static args = [{name: 'person', description: 'Person to say hello to', required: true}]
+  static args = injectableArgs
 
   async run(): Promise<void> {
     const {args, flags} = await this.parse(Hello)
